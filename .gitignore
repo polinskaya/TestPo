@@ -3,3 +3,6 @@
 **/target
 **/bin
 *.orig
+**/.vs
+**/packages
+**/obj
