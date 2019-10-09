@@ -1,10 +1,8 @@
-﻿using System;
-
-namespace Triangle_inequality.Lib
+﻿namespace Triangle_inequality.Lib
 {
     public class Triangle
     {
-        public static bool IsTriangle(double a, double b, double c) =>
-            (a > 0 && b > 0 && c > 0 && (a + b > c) && (a + c > b) && (b + c > a));
+        public static bool IsTriangle(double firstSide, double secondSide, double thirdSide) =>
+            (firstSide > 0 && secondSide > 0 && thirdSide > 0 && (firstSide + secondSide > thirdSide) && (firstSide + thirdSide > secondSide) && (secondSide + thirdSide > firstSide));
     }
 }
