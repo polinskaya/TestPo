@@ -26,9 +26,7 @@
 
         public override string ToString()
         {
-            return base.ToString().Replace("}",
-                ", passengersCapacity=" + PassengersCapacity +
-                '}');
+            return base.ToString().Replace("}",", passengersCapacity=" + PassengersCapacity +'}');
         }
     }
 }

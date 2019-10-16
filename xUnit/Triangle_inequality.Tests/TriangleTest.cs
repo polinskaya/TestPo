@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using System;
 using Triangle_inequality.Lib;
 
 namespace Triangle_inequality.Tests
@@ -21,7 +22,8 @@ namespace Triangle_inequality.Tests
         [Test]
         public void OneNegativeLengthSideTest()
         {
-            Assert.IsFalse(Triangle.IsTriangle(-7, 27, 3.3));
+            Assert.Throws<ArgumentException>(() => Triangle.IsTriangle(-7, 27, 3.3));
+            //Assert.IsFalse(Triangle.IsTriangle(-7, 27, 3.3));
         }
 
         [Test]
@@ -45,25 +47,31 @@ namespace Triangle_inequality.Tests
         [Test]
         public void ThreeNegativeLengthSidesTest()
         {
-            Assert.IsFalse(Triangle.IsTriangle(-1, -2, -8));
+            Assert.Throws<ArgumentException>(() => Triangle.IsTriangle(-1, -2, -8));
         }
 
         [Test]
         public void ThreeZeroLengthSidesTest()
         {
-            Assert.IsFalse(Triangle.IsTriangle(0, 0, 0));
+            Assert.Throws<ArgumentException>(() => Triangle.IsTriangle(0, 0, 0));
         }
 
         [Test]
         public void TwoNegativeLengthSidesTest()
         {
-            Assert.IsFalse(Triangle.IsTriangle(-17, 14, -16));
+            Assert.Throws<ArgumentException>(() => Triangle.IsTriangle(-17, 14, -16));
         }
 
         [Test]
         public void ZeroLengthSideTest()
         {
-            Assert.IsFalse(Triangle.IsTriangle(3, 0, 2));
+            Assert.Throws<ArgumentException>(() => Triangle.IsTriangle(3, 0, 2));
+        }
+
+        [Test]
+        public void InfinitySideTriangle()
+        {
+            Assert.Throws<OverflowException>(() => Triangle.IsTriangle(double.PositiveInfinity, double.PositiveInfinity, double.PositiveInfinity));
         }
     }
 }
