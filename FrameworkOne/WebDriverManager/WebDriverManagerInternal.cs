@@ -36,7 +36,6 @@ namespace WebDriverManagerInternal
         public static void CloseDriver()
         {
             _webDriver.Quit();
-            _webDriver.Dispose();
             _webDriver = null;
         }
     }
