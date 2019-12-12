@@ -26,7 +26,7 @@ namespace SeleniumWebdriver.Tests
                 SearchRequestModel requestModel =
                     SearchRequestCreator.CreateSearchRequestModelWithEqualFromAndDestinationProps();
                 MainPage mainPage = new MainPage(_webDriver, LoggerConfiguration.Log);
-                var searchResultPage = 
+                var searchResultPage =
                     mainPage
                         .OpenPage()
                         .WriteIntoFromField(requestModel.From)
