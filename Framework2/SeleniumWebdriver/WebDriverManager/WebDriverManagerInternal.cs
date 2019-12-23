@@ -18,8 +18,15 @@ namespace WebDriverManagerInternal
                 switch (TestContext.Parameters.Get("browser"))
                 {
                     case "Chrome":
+                        var dgf = new ChromeConfig();
+                        ChromeOptions options = new ChromeOptions();
+                        options.AddArguments("disable-infobars");
+                        options.AddArguments("--incognito");
+                        options.AddArguments("--disable-gpu");
+                        options.AddArguments("--no-sandbox");
+                        options.AddArguments("--allow-insecure-localhost");
                         new DriverManager().SetUpDriver(new ChromeConfig());
-                        _webDriver = new ChromeDriver();
+                        _webDriver = new ChromeDriver(options);
                         break;
                     default:
                         new DriverManager().SetUpDriver(new FirefoxConfig(), architecture: WebDriverManager.Helpers.Architecture.X64);
