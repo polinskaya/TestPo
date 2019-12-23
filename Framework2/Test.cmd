@@ -1,5 +1,7 @@
+pushd Framework2
 pushd build
 nuget.exe restore ../SeleniumWebdriver.sln
+popd
 popd
 cd SeleniumWebdriver
 "c:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MsBuild.exe" SeleniumWebdriver.csproj /p:OutputPath=d:\GOCD_ARTIFACTS\package /t:rebuild
