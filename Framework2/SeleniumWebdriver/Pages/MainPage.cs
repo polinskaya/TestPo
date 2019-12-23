@@ -19,7 +19,7 @@ namespace SeleniumWebdriver.Pages
         private const string ElderPassengersIncrementControlSelector = "(//SPAN[@class='twidget-inc twidget-q-btn'])[1]";
         private const string ApplyPassengersCountSelector = "//DIV[@class='twidget-passengers-ready-button']";
         private const string PassengersCountTextSelector = "//DIV[@class='twidget-pas-no']";
-        //
+
         private const string DepartCalendarSelector = "//SPAN[contains(@class,'twidget-date-depart')]";
         private const string ReturnCalendarSelector = "//SPAN[contains(@class,'twidget-date-return')]";
         private const string CalendarNextMonthSelector = "(//TH[@class='next'])[1]";
@@ -117,7 +117,7 @@ namespace SeleniumWebdriver.Pages
 
         public MainPage WriteIntoDestinationField(string text)
         {
-            Logger.Info($"WriteIntoDestinationField: {text}.");
+            LogInfo(nameof(MainPage), $" Write Into Destination Field: {text}.");
             DestinationField.Clear();
             DestinationField.SendKeys(text);
             return this;
@@ -125,7 +125,7 @@ namespace SeleniumWebdriver.Pages
 
         public MainPage WriteIntoFromField(string text)
         {
-            Logger.Info($"WriteIntoFromField: {text}.");
+            LogInfo(nameof(MainPage), $"Write Into From Field: {text}.");
             FromField.SendKeys(Keys.Control + "A" + Keys.Backspace);
             FromField.SendKeys(text);
             return this;
@@ -133,28 +133,28 @@ namespace SeleniumWebdriver.Pages
 
         public SearchResultPage ClickToSearchButton()
         {
-            Logger.Info($"perform search of tickets.");
+            LogInfo(nameof(MainPage), $"perform search of tickets.");
             SearchButton.Click();
             return new SearchResultPage(Driver, Logger);
         }
 
         public AviaCompanyPage ClickToAviacompanyButton()
         {
-            Logger.Info($"Class: {nameof(MainPage)}, perform search of tickets.");
+            LogInfo(nameof(MainPage), $"select aviacompany.");
             FirstAviaCompany.Click();
             return new AviaCompanyPage(Driver, Logger);
         }
 
         public MainPage OpenPassengersControl()
         {
-            Logger.Info($"open passengers selection form.");
+            LogInfo(nameof(MainPage), $"open passengers selection form.");
             PassengersControl.Click();
             return this;
         }
 
         public MainPage AddElderPassengers(int passengersCount)
         {
-            Logger.Info($"Add {passengersCount} elder passengers");
+            LogInfo(nameof(MainPage), $"Add {passengersCount} elder passengers.");
             for (int i = 0; i < passengersCount; i++)
             {
                 ElderPassengersIncrementControl.Click();
@@ -165,7 +165,7 @@ namespace SeleniumWebdriver.Pages
 
         public MainPage ApplyPassengers()
         {
-            Logger.Info($"Apply passengers count.");
+            LogInfo(nameof(MainPage), $" Apply passengers count.");
             ApplyPassengersButton.Click();
             return this;
         }
@@ -177,12 +177,14 @@ namespace SeleniumWebdriver.Pages
 
         public MainPage OpenDepartCalendar()
         {
+            LogInfo(nameof(MainPage), $"open depart calendar.");
             DepartCalendar.Click();
             return this;
         }
 
         public MainPage OpenReturnCalendar()
         {
+            LogInfo(nameof(MainPage), $"open return calendar.");
             ReturnCalendar.Click();
             return this;
         }
@@ -210,6 +212,7 @@ namespace SeleniumWebdriver.Pages
                 currentSelectedMonthIndex = GetCurrentSelectedToMonthIndex();
                 if (currentSelectedMonthIndex != currentMonth)
                 {
+                    LogInfo(nameof(MainPage), $"{currentMonth} could not be find in calendar control.");
                     throw new InvalidOperationException($"{currentMonth} could not be find in calendar control.");
                 }
             }
@@ -218,7 +221,6 @@ namespace SeleniumWebdriver.Pages
 
             return this;
         }
-
 
         public MainPage SelectReturnDate(double? dayOffset = null)
         {
@@ -243,6 +245,7 @@ namespace SeleniumWebdriver.Pages
                 currentSelectedMonthIndex = GetCurrentSelectedToMonthIndex();
                 if (currentSelectedMonthIndex != currentMonth)
                 {
+                    LogInfo(nameof(MainPage), $"{currentMonth} could not be find in calendar control.");
                     throw new InvalidOperationException($"{currentMonth} could not be find in calendar control.");
                 }
             }
@@ -262,6 +265,7 @@ namespace SeleniumWebdriver.Pages
                 {
                     availableDate.Click();
                     dateFound = true;
+                    LogInfo(nameof(MainPage), $"{selectedDate} date selected.");
                     break;
                 }
             }
@@ -307,27 +311,30 @@ namespace SeleniumWebdriver.Pages
             return MonthToInt[currentSelectedMonth];
         }
 
-
         private MainPage SelectPreviousMonth()
         {
+            LogInfo(nameof(MainPage), $"navigate to prev month.");
             CalendarPrevMonthButton.Click();
             return this;
         }
 
         private MainPage SelectNextMonth()
         {
+            LogInfo(nameof(MainPage), $"navigate to next month.");
             CalendarNextMonthButton.Click();
             return this;
         }
 
         public MainPage SelectBusinessClassTicketType()
         {
+            LogInfo(nameof(MainPage), $"select business class tickets.");
             BusinessClassCheckBox.Click();
             return this;
         }
 
         public MainPage CancelDepartDate()
         {
+            LogInfo(nameof(MainPage), $"cancel depart date.");
             CancelDepartDateButton.Click();
             return this;
         }
@@ -335,7 +342,7 @@ namespace SeleniumWebdriver.Pages
 
         public override MainPage OpenPage()
         {
-            Logger.Info($"Open main page.");
+            LogInfo(nameof(MainPage), $"Open main page.");
             Driver.Navigate().GoToUrl("https://loukosterov.ru/");
             return this;
         }

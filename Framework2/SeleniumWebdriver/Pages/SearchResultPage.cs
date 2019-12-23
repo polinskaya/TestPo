@@ -32,7 +32,7 @@ namespace SeleniumWebdriver.Pages
         private const string SortControlSelector = "//DIV[@class='custom_select__selected']";
         private const string SortByTimeOptionSelector = "//LI[@data-option-id='duration']";
 
-        private const string SelectReturnPastsFormat = "//DIV[@class='flight flight--return']";
+        private const string SelectReturnPartsFormat = "//DIV[@class='flight flight--return']";
 
 
         [FindsBy(How = How.XPath, Using = ErrorMessageSelector)]
@@ -81,20 +81,21 @@ namespace SeleniumWebdriver.Pages
 
         public override SearchResultPage OpenPage()
         {
-            Logger.Info($"Open search result page.");
+            LogInfo(nameof(SearchResultPage), $"Open search result page.");
             return this;
         }
 
         public SearchResultPage OpenSortOptionList()
         {
             var wait = new WebDriverWait(Driver, new TimeSpan(0,0,0,30));
-            
+            LogInfo(nameof(SearchResultPage), $"Open sort options list.");
             SortControl.Click();
             return this;
         }
 
         public SearchResultPage OpenAgencyOptionList()
         {
+            LogInfo(nameof(SearchResultPage), $"Open agency options list.");
             var wait = new WebDriverWait(Driver, new TimeSpan(0, 0, 0, 30));
             AdjustElementExibition(AgencyControl, 1000);
             var actions = new Actions(this.Driver);
@@ -104,7 +105,7 @@ namespace SeleniumWebdriver.Pages
             return this;
         }
 
-        public void AdjustElementExibition(IWebElement elemento, int scrollValue)
+        private void AdjustElementExibition(IWebElement elemento, int scrollValue)
         {
             if (elemento.Location.Y < 400) return;
 
@@ -119,12 +120,14 @@ namespace SeleniumWebdriver.Pages
 
         public SearchResultPage SelectSortByTimeOption()
         {
+            LogInfo(nameof(SearchResultPage), $"select sort by time option.");
             SortByTimeOption.Click();
             return this;
         }
 
         public SearchResultPage SelectAllAgencyOption()
         {
+            LogInfo(nameof(SearchResultPage), $"select all agency option.");
             var wait = new WebDriverWait(Driver, new TimeSpan(0, 0, 0, 30));
             var actions = new Actions(this.Driver);
             actions.MoveToElement(AllAgencyOption);
@@ -136,6 +139,7 @@ namespace SeleniumWebdriver.Pages
 
         public SearchResultPage SelectAgencyOption(string agency)
         {
+            LogInfo(nameof(SearchResultPage), $"select {agency} option.");
             var selector = string.Format(AgencyOptionSelectorFormat, agency);
 
             var agencyOption = Driver.FindElement(By.XPath(selector));
@@ -146,8 +150,7 @@ namespace SeleniumWebdriver.Pages
 
         public bool AllTicketsWithoutDepartPart()
         {
-            List<IWebElement> availableDates = Driver.FindElements(By.XPath(SelectReturnPastsFormat)).ToList();
-
+            List<IWebElement> availableDates = Driver.FindElements(By.XPath(SelectReturnPartsFormat)).ToList();
             return !availableDates.Any(element=> element.Displayed);
         }
 
