@@ -10,27 +10,24 @@ namespace SeleniumWebdriver.Pages
 {
     public class MainPage : BasePage<MainPage>
     {
-        private const string SearchButtonSelector = "//BUTTON[@type='submit'][text()='НАЙТИ']";
-        private const string DestinationFieldSelector = "//INPUT[@id='twidget-destination']";
-        private const string FromFieldSelector = "//INPUT[@id='twidget-origin']";
+        private const string SearchButtonSelector = "//button[@type='submit'][text()='НАЙТИ']";
+        private const string DestinationFieldSelector = "//input[@id='twidget-destination']";
+        private const string FromFieldSelector = "//input[@id='twidget-origin']";
 
-        private const string PassengersControlSelector = "//DIV[@class='twidget-passengers-detail']";
-        private const string BusinessClassCheckBoxSelector = "//LABEL[text()='Бизнес-класс']";
-        private const string ElderPassengersIncrementControlSelector = "(//SPAN[@class='twidget-inc twidget-q-btn'])[1]";
-        private const string ApplyPassengersCountSelector = "//DIV[@class='twidget-passengers-ready-button']";
-        private const string PassengersCountTextSelector = "//DIV[@class='twidget-pas-no']";
+        private const string PassengersControlSelector = "//div[@class='twidget-passengers-detail']";
+        private const string BusinessClassCheckBoxSelector = "//label[text()='Бизнес-класс']";
+        private const string ElderPassengersIncrementControlSelector = "(//span[@class='twidget-inc twidget-q-btn'])[1]";
+        private const string ApplyPassengersCountSelector = "//div[@class='twidget-passengers-ready-button']";
+        private const string PassengersCountTextSelector = "//div[@class='twidget-pas-no']";
 
-        private const string DepartCalendarSelector = "//SPAN[contains(@class,'twidget-date-depart')]";
-        private const string ReturnCalendarSelector = "//SPAN[contains(@class,'twidget-date-return')]";
-        private const string CalendarNextMonthSelector = "(//TH[@class='next'])[1]";
-        private const string CalendarPrevMonthSelector = "(//TH[@class='prev'])[1]";
-        private const string CurrentMonthSelector = "(//TH[@colspan='5'])[1]";
-
-        private const string CancelDepartDateButtonSelector = "//TD[@class='datepicker-cancel-return-date']";
-
-        private const string FirstAviaCompanyControlSelector = "//IMG[@class='aligncenter size-full wp-image-10556']";
-
-        private const string SelectCalendarDatesFormat = "//TD[contains(@class,'day') and not(contains(@class, 'disabled'))]";
+        private const string DepartCalendarSelector = "//span[contains(@class,'twidget-date-depart')]";
+        private const string ReturnCalendarSelector = "//span[contains(@class,'twidget-date-return')]";
+        private const string CalendarNextMonthSelector = "(//th[@class='next'])[1]";
+        private const string CalendarPrevMonthSelector = "(//th[@class='prev'])[1]";
+        private const string CurrentMonthSelector = "(//th[@colspan='5'])[1]";
+        private const string CancelDepartDateButtonSelector = "//td[@class='datepicker-cancel-return-date']";
+        private const string FirstAviaCompanyControlSelector = "//img[@class='aligncenter size-full wp-image-10556']";
+        private const string SelectCalendarDatesFormat = "//td[contains(@class,'day') and not(contains(@class, 'disabled'))]";
 
         [FindsBy(How = How.XPath, Using = SearchButtonSelector)]
         public IWebElement SearchButton { get; set; }
@@ -117,7 +114,7 @@ namespace SeleniumWebdriver.Pages
 
         public MainPage WriteIntoDestinationField(string text)
         {
-            LogInfo(nameof(MainPage), $" Write Into Destination Field: {text}.");
+            LogInfo(nameof(MainPage), $" write Into Destination Field: {text}.");
             DestinationField.Clear();
             DestinationField.SendKeys(text);
             return this;
@@ -125,7 +122,7 @@ namespace SeleniumWebdriver.Pages
 
         public MainPage WriteIntoFromField(string text)
         {
-            LogInfo(nameof(MainPage), $"Write Into From Field: {text}.");
+            LogInfo(nameof(MainPage), $"write Into From Field: {text}.");
             FromField.SendKeys(Keys.Control + "A" + Keys.Backspace);
             FromField.SendKeys(text);
             return this;
@@ -154,7 +151,7 @@ namespace SeleniumWebdriver.Pages
 
         public MainPage AddElderPassengers(int passengersCount)
         {
-            LogInfo(nameof(MainPage), $"Add {passengersCount} elder passengers.");
+            LogInfo(nameof(MainPage), $"add {passengersCount} elder passengers.");
             for (int i = 0; i < passengersCount; i++)
             {
                 ElderPassengersIncrementControl.Click();
@@ -165,7 +162,7 @@ namespace SeleniumWebdriver.Pages
 
         public MainPage ApplyPassengers()
         {
-            LogInfo(nameof(MainPage), $" Apply passengers count.");
+            LogInfo(nameof(MainPage), $" apply passengers count.");
             ApplyPassengersButton.Click();
             return this;
         }
@@ -342,7 +339,7 @@ namespace SeleniumWebdriver.Pages
 
         public override MainPage OpenPage()
         {
-            LogInfo(nameof(MainPage), $"Open main page.");
+            LogInfo(nameof(MainPage), $"open main page.");
             Driver.Navigate().GoToUrl("https://loukosterov.ru/");
             return this;
         }

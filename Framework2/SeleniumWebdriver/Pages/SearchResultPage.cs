@@ -13,26 +13,26 @@ namespace SeleniumWebdriver.Pages
 {
     public class SearchResultPage : BasePage<SearchResultPage>
     {
-        private const string ErrorMessageSelector = "//DIV[@class='description description--bad_search_params']";
-        private const string DestinationFieldSelector = "//INPUT[@id='flights-destination-prepop-whitelabel_ru']";
+        private const string ErrorMessageSelector = "//div[@class='description description--bad_search_params']";
+        private const string DestinationFieldSelector = "//input[@id='flights-destination-prepop-whitelabel_ru']";
 
         private const string FromPlaceSelector = "//span[contains(@class,'mewtwo-flights-origin-country__pseudo')]";
-        private const string AgencyOptionSelectorFormat = "//LABEL[@class='label-block name airlines-label g-text-overflow' and contains(text(),'{0}')]";
+        private const string AgencyOptionSelectorFormat = "//label[@class='label-block name airlines-label g-text-overflow' and contains(text(),'{0}')]";
         private const string AgencySelector = "(//div[contains(@class,'title-dropdown')])[10]";
-        private const string AllAgencyOptionSelector = "(//LABEL[@class='label-block name stops-label'][text()='Все'][text()='Все'])[5]";
-        private const string AgencyOnTicketSelector = "(//DIV[@class='ticket-action__main_proposal ticket-action__main_proposal--'])[1]";
+        private const string AllAgencyOptionSelector = "//label[@for='gates_filter']";
+        private const string AgencyOnTicketSelector = "(//div[@class='ticket-action__main_proposal ticket-action__main_proposal--'])[1]";
         private const string DestinationPlaceSelector = "//span[contains(@class,'mewtwo-flights-destination-country__pseudo')]";
 
-        private const string FirstTicketTimeHoursSelector = "(//HEADER[@class='flight-brief-layovers__flight_time'])[7]/span[@class='formatted_time'][1]";
-        private const string FirstTicketTimeMinutesSelector = "(//HEADER[@class='flight-brief-layovers__flight_time'])[7]/span[@class='formatted_time'][2]";
+        private const string FirstTicketTimeHoursSelector = "(//header[@class='flight-brief-layovers__flight_time'])[7]/span[@class='formatted_time'][1]";
+        private const string FirstTicketTimeMinutesSelector = "(//header[@class='flight-brief-layovers__flight_time'])[7]/span[@class='formatted_time'][2]";
 
-        private const string SecondTicketTimeHoursSelector = "(//HEADER[@class='flight-brief-layovers__flight_time'])[9]/span[@class='formatted_time'][1]";
-        private const string SecondTicketTimeMinutesSelector = "(//HEADER[@class='flight-brief-layovers__flight_time'])[9]/span[@class='formatted_time'][2]";
+        private const string SecondTicketTimeHoursSelector = "(//header[@class='flight-brief-layovers__flight_time'])[9]/span[@class='formatted_time'][1]";
+        private const string SecondTicketTimeMinutesSelector = "(//header[@class='flight-brief-layovers__flight_time'])[9]/span[@class='formatted_time'][2]";
 
-        private const string SortControlSelector = "//DIV[@class='custom_select__selected']";
-        private const string SortByTimeOptionSelector = "//LI[@data-option-id='duration']";
+        private const string SortControlSelector = "//div[@class='custom_select__selected']";
+        private const string SortByTimeOptionSelector = "//li[@data-option-id='duration']";
 
-        private const string SelectReturnPartsFormat = "//DIV[@class='flight flight--return']";
+        private const string SelectReturnPartsFormat = "//div[@class='flight flight--return']";
 
 
         [FindsBy(How = How.XPath, Using = ErrorMessageSelector)]
@@ -81,21 +81,21 @@ namespace SeleniumWebdriver.Pages
 
         public override SearchResultPage OpenPage()
         {
-            LogInfo(nameof(SearchResultPage), $"Open search result page.");
+            LogInfo(nameof(SearchResultPage), $"open search result page.");
             return this;
         }
 
         public SearchResultPage OpenSortOptionList()
         {
             var wait = new WebDriverWait(Driver, new TimeSpan(0,0,0,30));
-            LogInfo(nameof(SearchResultPage), $"Open sort options list.");
+            LogInfo(nameof(SearchResultPage), $"open sort options list.");
             SortControl.Click();
             return this;
         }
 
         public SearchResultPage OpenAgencyOptionList()
         {
-            LogInfo(nameof(SearchResultPage), $"Open agency options list.");
+            LogInfo(nameof(SearchResultPage), $"open agency options list.");
             var wait = new WebDriverWait(Driver, new TimeSpan(0, 0, 0, 30));
             AdjustElementExibition(AgencyControl, 1000);
             var actions = new Actions(this.Driver);
